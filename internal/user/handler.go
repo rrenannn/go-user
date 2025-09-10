@@ -8,17 +8,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type HandlerInterface interface {
+type UserHandler interface {
 	CreateUser(c echo.Context) error
 	GetUserById(c echo.Context) error
 	GetUserByEmail(c echo.Context) error
 }
 
 type Handler struct {
-	service Service
+	service UserService
 }
 
-func NewHandler(service Service) *Handler {
+func NewHandler(service UserService) *Handler {
 	return &Handler{service: service}
 }
 

@@ -1,11 +1,11 @@
 services:
   db:
     image: postgres:15
-    container_name: uberfx_db
+    container_name: go-user-db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: uber-fx
+      POSTGRES_DB: go-user
     ports:
       - "5432:5432"
     volumes:

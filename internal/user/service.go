@@ -8,7 +8,7 @@ import (
 	"github.com/rrenannn/go-user/infra/crypt"
 )
 
-type ServiceInterface interface {
+type UserService interface {
 	CreateUser(ctx context.Context, data UserRequest) (UserResponse, error)
 	GetUserById(ctx context.Context, id int64) (UserResponse, error)
 	GetUserByEmail(ctx context.Context, email string) (UserResponse, error)
@@ -16,12 +16,12 @@ type ServiceInterface interface {
 }
 
 type Service struct {
-	repo  Repository
+	repo  UserRepository
 	crypt *crypt.Crypt
 }
 
-func NewService(repo Repository) *Service {
-	return &Service{repo: repo}
+func NewService(repo UserRepository, crypt *crypt.Crypt) *Service {
+	return &Service{repo: repo, crypt: crypt}
 }
 
 func (s *Service) CreateUser(ctx context.Context, data UserRequest) (UserResponse, error) {
@@ -41,7 +41,7 @@ func (s *Service) CreateUser(ctx context.Context, data UserRequest) (UserRespons
 		Name:     data.Name,
 		Email:    data.Email,
 		Password: hashedPassword,
-		Status:   data.Status,
+		Status:   true,
 	})
 	if err != nil {
 		return UserResponse{}, err

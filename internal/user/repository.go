@@ -7,7 +7,7 @@ import (
 	db "github.com/rrenannn/go-user/db/sqlc"
 )
 
-type RepositoryInterface interface {
+type UserRepository interface {
 	CreateUser(ctx context.Context, arg db.CreateUserParams) (db.User, error)
 	GetUserById(ctx context.Context, id int64) (db.User, error)
 	GetUserByEmail(ctx context.Context, email string) (db.User, error)
