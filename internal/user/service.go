@@ -8,6 +8,13 @@ import (
 	"github.com/rrenannn/go-user/infra/crypt"
 )
 
+type ServiceInterface interface {
+	CreateUser(ctx context.Context, data UserRequest) (UserResponse, error)
+	GetUserById(ctx context.Context, id int64) (UserResponse, error)
+	GetUserByEmail(ctx context.Context, email string) (UserResponse, error)
+	ResetPassword(ctx context.Context, arg db.ResetPasswordParams) error
+}
+
 type Service struct {
 	repo  Repository
 	crypt *crypt.Crypt
